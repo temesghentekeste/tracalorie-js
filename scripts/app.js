@@ -14,10 +14,10 @@ const ItemCtrl = (function() {
   const data = {
     items: [
       {id: 0, name: 'Steak Dinner', calories: 1200},
-      {id: 0, name: 'Egg', calories: 1200},
-      {id: 0, name: 'Fish and Rice', calories: 2200},
-      {id: 0, name: 'Veg Dinner', calories: 400},
-      {id: 0, name: 'Cookies', calories: 1200},
+      {id: 1, name: 'Egg', calories: 1200},
+      {id: 2, name: 'Fish and Rice', calories: 2200},
+      {id: 3, name: 'Veg Dinner', calories: 400},
+      {id: 4, name: 'Cookies', calories: 1200},
     ],
     currentItem: null,
     totalCalories: 0
@@ -28,9 +28,29 @@ const ItemCtrl = (function() {
     getItems: function() {
       return data.items;
     },
+    addItem: function(name, calories) {
+      let ID;
+      if(data.items.length > 0) {
+        ID = data.items[data.items.length - 1].id + 1;
+      }else {
+        ID = 0;
+      }
+
+      // Parse calories
+      calories = parseFloat(calories);
+
+      // Create a new Item
+      const newItem = new Item(ID, name, calories); 
+
+      // Add to items array
+      data.items.push(newItem);
+
+      return newItem;
+    },
     logData: function() {
       return data;
     }
+    
   }
 
 
@@ -40,7 +60,10 @@ const ItemCtrl = (function() {
 const UICtrl = (function() {
 
   const UISelectors = {
-    itemList: '#item-list'
+    itemList: '#item-list',
+    addBtn: '.add-btn',
+    itemNameInput: '#item-name',
+    itemCaloriesInput: '#item-calories'
   }
   // Public methods
   return {
@@ -57,7 +80,15 @@ const UICtrl = (function() {
 
       // Insert List Items
       document.querySelector(UISelectors.itemList).innerHTML = html;
-
+    },
+    getSelectors: function() {
+      return UISelectors;
+    },
+    getItem: function() {
+      return {
+        name: document.querySelector(UISelectors.itemNameInput).value,
+        calories: document.querySelector(UISelectors.itemCaloriesInput).value
+      }
     }
   }
 })();
@@ -65,6 +96,25 @@ const UICtrl = (function() {
 // App Controller
 const App = (function(ItemCtrl, UICtrls) {
 
+  // Load event listeners
+  const loadEventListeners = function() {
+    // Get UISelectors
+    const UISelectors = UICtrl.getSelectors();
+
+    // Add item event
+    document.querySelector(UISelectors.addBtn).addEventListener('click', itemAddSubmit);
+  }
+
+  // Add item submit
+  const itemAddSubmit = function(e) {
+    e.preventDefault();
+    // Get item from UI Controller
+    const input = UICtrl.getItem();
+    if(input.name !== '' && input.calories !== '') {
+      const newItem = ItemCtrl.addItem(input.name, input.calories);
+      UICtrl.populateItemList(ItemCtrl.getItems());
+    }
+  }
   // Public methods
   return {
     init: function() {
@@ -75,6 +125,9 @@ const App = (function(ItemCtrl, UICtrls) {
 
       // Populate list with items
       UICtrl.populateItemList(items);
+
+      // Load event listeners
+      loadEventListeners();
     }
   }
   
