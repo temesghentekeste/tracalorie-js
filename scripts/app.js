@@ -20,6 +20,17 @@ const StorageCtrl = (function() {
         mealItems = JSON.parse(localStorage.getItem('mealItems'));
       }
       return mealItems;
+    },
+    updateItemStorage: function(updatedItem) {
+      let mealItems = JSON.parse(localStorage.getItem('mealItems'));
+
+      mealItems.forEach((meal, index) => {
+        if(meal.id === updatedItem.id) {
+          mealItems.splice(index, 1, updatedItem);
+        }
+      });
+
+      localStorage.setItem('mealItems', JSON.stringify(mealItems));
     }
   }
 })();
@@ -145,9 +156,9 @@ const UICtrl = (function() {
       let html = '';
       items.forEach(item => {
         html += `
-          <li class="edit-item collection-item" id="item-${item.id}">
+          <li class="collection-item" id="item-${item.id}">
             <strong>${item.name}: </strong> <em>${item.calories}</em>
-            <a href="#" class="secondary-content"><i class="fas   fa-pencil-alt"></i></a>
+            <a href="#" class="secondary-content"><i class="edit-item fas   fa-pencil-alt"></i></a>
           </li>
         `
       });
@@ -318,7 +329,6 @@ const App = (function(ItemCtrl, StorageCtrl, UICtrl) {
     if(e.target.classList.contains('edit-item')){
       // Get list item id (item-0, item-1)
       const listId = e.target.parentNode.parentNode.id;
-      
       // Break into an array
       const listIdArr = listId.split('-');
       const id = parseInt(listIdArr[1]);
@@ -351,6 +361,9 @@ const App = (function(ItemCtrl, StorageCtrl, UICtrl) {
     const totalCalories = ItemCtrl.getTotalCalories();
     // Show total calories
     UICtrl.showTotoalCalories(totalCalories);
+
+    // Update local storage
+    StorageCtrl.updateItemStorage(updatedItem);
 
     // Clear edit state
     UICtrl.clearEditState();
