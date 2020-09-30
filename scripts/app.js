@@ -1,5 +1,28 @@
 // Storage Controller
+const StorageCtrl = (function() {
+  return {
+    storeItem: function(item) {
+      let mealItems;
 
+      if(localStorage.getItem('mealItems') === null){
+        mealItems.push(item);
+      }else{
+        mealItems = JSON.parse(localStorage.getItem('mealItems'));
+        mealItems.push(item);
+      }
+      localStorage.setItem('mealItems', JSON.stringify(mealItems));
+    },
+    getItemsFromStorage: function() {
+      let mealItems;
+      if(localStorage.getItem('mealItems') === null) {
+        mealItems = [];
+      }else {
+        mealItems = JSON.parse(localStorage.getItem('mealItems'));
+      }
+      return mealItems;
+    }
+  }
+})();
 
 // Item Controller
 const ItemCtrl = (function() {
@@ -12,13 +35,7 @@ const ItemCtrl = (function() {
 
   // Data Structure / State
   const data = {
-    items: [
-      // {id: 0, name: 'Steak Dinner', calories: 1200},
-      // {id: 1, name: 'Egg', calories: 1200},
-      // {id: 2, name: 'Fish and Rice', calories: 2200},
-      // {id: 3, name: 'Veg Dinner', calories: 400},
-      // {id: 4, name: 'Cookies', calories: 1200},
-    ],
+    items: StorageCtrl.getItemsFromStorage(),
     currentItem: null,
     totalCalories: 0
   };
@@ -236,7 +253,7 @@ const UICtrl = (function() {
 })();
 
 // App Controller
-const App = (function(ItemCtrl, UICtrls) {
+const App = (function(ItemCtrl, StorageCtrl, UICtrl) {
 
   // Load event listeners
   const loadEventListeners = function() {
@@ -278,6 +295,9 @@ const App = (function(ItemCtrl, UICtrls) {
     if(input.name !== '' && input.calories !== '') {
       // Insert item to the data structure / state / data store
       const newItem = ItemCtrl.addItem(input.name, input.calories);
+
+      // Add item to ls
+      StorageCtrl.storeItem(newItem);
       // Add item to the UI
       UICtrl.addListItem(newItem);
 
@@ -412,7 +432,7 @@ const App = (function(ItemCtrl, UICtrls) {
     }
   }
   
-})(ItemCtrl, UICtrl);
+})(ItemCtrl, StorageCtrl, UICtrl);
 
 
 App.init();
