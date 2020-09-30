@@ -217,7 +217,7 @@ const App = (function(ItemCtrl, UICtrls) {
 
     // Add item event
     document.querySelector(UISelectors.addBtn).addEventListener('click', itemAddSubmit);
-    
+
     // Disable submit on enter
     document.addEventListener('keypress', e => {
       if(e.key === 13 || e.keyCode === 13 || e.which == 13){
@@ -231,6 +231,9 @@ const App = (function(ItemCtrl, UICtrls) {
 
     // Edit button submit event
     document.querySelector(UISelectors.updateBtn).addEventListener('click', itemUpdateSubmit);
+
+    // Back button  event
+    document.querySelector(UISelectors.backBtn).addEventListener('click', backToInsertMode);
   }
 
   // Add item submit
@@ -277,8 +280,16 @@ const App = (function(ItemCtrl, UICtrls) {
 
     
     }
-  }
 
+  }
+  
+  // Back to Insert Mode
+  const backToInsertMode = function(e)  {
+    console.log('Clicked');
+    e.preventDefault();
+    UICtrl.clearEditState();
+  }
+  
   // Item update submit 
   const itemUpdateSubmit = function(e) {
     e.preventDefault();
