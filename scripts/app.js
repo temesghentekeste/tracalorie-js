@@ -86,6 +86,17 @@ const ItemCtrl = (function() {
       });
 
       return found;
+    },
+
+    deleteItem: function(id) {
+      // Get the ids
+      const ids = data.items.map( item => item.id);
+
+      // Get the index
+      const index = ids.indexOf(id);
+
+      // Remove item
+      data.items.splice(index, 1);
     }
     
   }
@@ -177,6 +188,12 @@ const UICtrl = (function() {
 
     },
 
+    deleteListItem: function(id) {
+      id = `#item-${id}`;
+      const item = document.querySelector(id);
+      item.remove();     
+    },
+
     clearInputFields: function() {
       document.querySelector(UISelectors.itemNameInput).value = '';
       document.querySelector(UISelectors.itemCaloriesInput).value = '';
@@ -232,6 +249,9 @@ const App = (function(ItemCtrl, UICtrls) {
     // Edit button submit event
     document.querySelector(UISelectors.updateBtn).addEventListener('click', itemUpdateSubmit);
 
+    // Delete button submit event
+    document.querySelector(UISelectors.deleteBtn).addEventListener('click', itemDeleteSubmit);
+
     // Back button  event
     document.querySelector(UISelectors.backBtn).addEventListener('click', backToInsertMode);
   }
@@ -282,14 +302,6 @@ const App = (function(ItemCtrl, UICtrls) {
     }
 
   }
-  
-  // Back to Insert Mode
-  const backToInsertMode = function(e)  {
-    console.log('Clicked');
-    e.preventDefault();
-    UICtrl.clearEditState();
-  }
-  
   // Item update submit 
   const itemUpdateSubmit = function(e) {
     e.preventDefault();
@@ -312,6 +324,36 @@ const App = (function(ItemCtrl, UICtrls) {
 
 
   }
+
+  // Delete button submit event
+  const itemDeleteSubmit = function(e) {
+    e.preventDefault();
+    
+    // Get current item
+    const currentItem = ItemCtrl.getCurrentItem();
+
+    // Delete from data structure
+    ItemCtrl.deleteItem(currentItem.id);
+
+    // Delete form UI
+    UICtrl.deleteListItem(currentItem.id);
+
+    // Get total calories
+    const totalCalories = ItemCtrl.getTotalCalories();
+    // Show total calories
+    UICtrl.showTotoalCalories(totalCalories);
+
+     // Clear edit state
+     UICtrl.clearEditState();
+  }
+  
+  // Back to Insert Mode
+  const backToInsertMode = function(e)  {
+    console.log('Clicked');
+    e.preventDefault();
+    UICtrl.clearEditState();
+  }
+  
   // Public methods
   return {
     init: function() {
