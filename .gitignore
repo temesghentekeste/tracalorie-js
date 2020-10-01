@@ -3,3 +3,5 @@ deploy/
 package-lock.json
 .vscode/
 .env
+# Local Netlify folder
+.netlify

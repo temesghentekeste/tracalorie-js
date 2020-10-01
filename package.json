@@ -1,0 +1,25 @@
+{
+  "name": "tracalorie",
+  "version": "1.0.0",
+  "description": "A JavaScript project that tracks the calorie of a food item",
+  "main": "index.js",
+  "dependencies": {
+    "eslint-config-airbnb-base": "^14.1.0",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint": "^6.8.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/temesghentekeste/tracalorie-js.git"
+  },
+  "author": "Temesghen Tekeste",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/temesghentekeste/tracalorie-js/issues"
+  },
+  "homepage": "https://github.com/temesghentekeste/tracalorie-js#readme"
+}

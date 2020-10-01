@@ -36,7 +36,7 @@ Tracalorie is a JavaScript project that tracks the calorie content of variety me
 ## Screenshots <a name = "screenshots"></a>
 
 ### Wide Screen
-![screenshot](./images/screencapture-widescreen.png) 
+![screenshot](./images/screencapture.gif) 
 ### Small Screen
 ![screenshot](./images/screencapture-mobile.png) 
 
