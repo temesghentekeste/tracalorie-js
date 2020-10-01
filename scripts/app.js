@@ -1,29 +1,30 @@
 // Storage Controller
 const StorageCtrl = (function() {
+  const localStorageKey = 'mealItems';
   return {
     storeItem: function(item) {
       let mealItems;
 
-      if(localStorage.getItem('mealItems') === null){
+      if(localStorage.getItem(localStorageKey) === null){
         mealItems = [];
         mealItems.push(item);
       }else{
-        mealItems = JSON.parse(localStorage.getItem('mealItems'));
+        mealItems = JSON.parse(localStorage.getItem(localStorageKey));
         mealItems.push(item);
       }
-      localStorage.setItem('mealItems', JSON.stringify(mealItems));
+      localStorage.setItem(localStorageKey, JSON.stringify(mealItems));
     },
     getItemsFromStorage: function() {
       let mealItems;
-      if(localStorage.getItem('mealItems') === null) {
+      if(localStorage.getItem(localStorageKey) === null) {
         mealItems = [];
       }else {
-        mealItems = JSON.parse(localStorage.getItem('mealItems'));
+        mealItems = JSON.parse(localStorage.getItem(localStorageKey));
       }
       return mealItems;
     },
     updateItemStorage: function(updatedItem) {
-      let mealItems = JSON.parse(localStorage.getItem('mealItems'));
+      let mealItems = JSON.parse(localStorage.getItem(localStorageKey));
 
       mealItems.forEach((meal, index) => {
         if(meal.id === updatedItem.id) {
@@ -31,20 +32,20 @@ const StorageCtrl = (function() {
         }
       });
 
-      localStorage.setItem('mealItems', JSON.stringify(mealItems));
+      localStorage.setItem(localStorageKey, JSON.stringify(mealItems));
     },
     deleteItemFromStorage: function(id) {
-      let mealItems = JSON.parse(localStorage.getItem('mealItems'));
+      let mealItems = JSON.parse(localStorage.getItem(localStorageKey));
       mealItems.forEach( (item, index) => {
         if(item.id === id ){
           mealItems.splice(index, 1);
         }
       });
-      localStorage.setItem('mealItems', JSON.stringify(mealItems));
+      localStorage.setItem(localStorageKey, JSON.stringify(mealItems));
 
     },
     removeItemsFromStorage: function() {
-      localStorage.removeItem('mealItems');
+      localStorage.removeItem(localStorageKey);
     }
   }
 })();
