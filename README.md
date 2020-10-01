@@ -1,7 +1,7 @@
 # Tracalorie
 
-[![View Code](https://img.shields.io/badge/View%20-Code-green)](https://github.com/temesghentekeste/task-list-js/pulls)
-[![Github Issues](https://img.shields.io/badge/GitHub-Issues-orange)](https://github.com/temesghentekeste/task-list-js/issues)
+[![View Code](https://img.shields.io/badge/View%20-Code-green)](https://github.com/temesghentekeste/tracalorie-js/pulls)
+[![Github Issues](https://img.shields.io/badge/GitHub-Issues-orange)](https://github.com/temesghentekeste/tracalorie-js/issues)
 
 
 ## Content
@@ -18,19 +18,20 @@
 
 ## About <a name = "about"></a>
 
-Task List is a project intended to showcase DOM Manipulation skills using Vanilla JavaScript. Local storage is used to persist the data.
+Tracalorie is a JavaScript project that tracks the calorie content of variety meal items. The goal of the project is to showcase the skills of  a popular JavaScript pattern called the module pattern. Local storage is used to persist the data.
 
 <h3>Description <a name = "description"></a></h3>
 <h4>This project allows a user to:</h4>
-<li>Add a task</li>
-<li>Filter a task</li>
-<li>Delete a task</li>
-<li>Clear all tasks</li>
-<li>Persist tasks using browser's localStorage</li>
+<li>Create a meal item</li>
+<li>Read a meal item</li>
+<li>Update a meal item</li>
+<li>Delete a meal item</li>
+<li>Clear all meal items</li>
+<li>Persist meal items using browser's localStorage</li>
 
 ## 🔴 Live Demo <a name = "live"></a>
 
-**Click [here](https://tasklist-js-temesghen.netlify.app/) in order to see a Live Demo of this project.**
+**Click [here](https://tracalorie-js-temesghen.netlify.app/) in order to see a Live Demo of this project.**
 
 ## Screenshots <a name = "screenshots"></a>
 
@@ -51,8 +52,8 @@ Task List is a project intended to showcase DOM Manipulation skills using Vanill
 ### Run a Local Copy
 - Download the repository to a local directory on your computer.
 - Or run the following commands on the terminal
-  - git clone https://github.com/temesghentekeste/task-list-js.git
-  - cd task-list-js
+  - git clone https://github.com/temesghentekeste/tracalorie-js.git
+  - cd tracalorie-js
   - open index.html file
 
 ## Prerequisites<a name = "prerequisites"></a>
@@ -71,7 +72,7 @@ Task List is a project intended to showcase DOM Manipulation skills using Vanill
 
 Contributions, issues and feature requests are welcome!
 
-Feel free to check the [issues page](https://github.com/temesghentekeste/task-list-js/issues).
+Feel free to check the [issues page](https://github.com/temesghentekeste/tracalorie-js/issues).
 
 
 ## 👍 Show your support
